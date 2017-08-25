@@ -2,52 +2,62 @@
 // A person is assigned to a century by taking their year of death,
 // dividing it by 100, and rounding it up, as in Math.ceil(person.died / 100)
 
-function findAverageAgeByCentry(array)
+function findAverageAgeEachCentury(array)
 {
-
+  // finds in which century the person belongs
   function belongsToCentury(person)
   {
     return Math.ceil(person.died / 100);
   }
 
+  // gets the age of the person
   function getAge(person)
   {
     return person.died - person.born;
   }
 
-  function average(array)
+  // creates the object that contains all the ages for each century
+  function createArrayOfAgesEachCentury()
   {
-    function plus(a, b)
-    {
-      return a + b;
-    }
+    var ageCentury = {};
 
-    return array.reduce(plus) / array.length;
-  }
+    array.forEach(function(person){
+      if(ageCentury[belongsToCentury(person)] == undefined){
+        ageCentury[belongsToCentury(person)] = [];
+      }
 
-  function calcAvgAgeByCentury(ageCentury)
-  {
-    for(var century in ageCentury){
-      ageCentury[century] = average(ageCentury[century]);
-    }
+      ageCentury[belongsToCentury(person)] = ageCentury[belongsToCentury(person)].concat(getAge(person));
+    });
 
     return ageCentury;
   }
 
-  var ageCentury = {};
-  array.forEach(function(person){
-    if(ageCentury[belongsToCentury(person)] == undefined){
-      ageCentury[belongsToCentury(person)] = [];
+  // calculates the average age for each century
+  function averageAgeEachCentury(ageCentury)
+  {
+    function average(array)
+    {
+      function plus(a, b){
+        return a + b;
+      }
+
+      return array.reduce(plus) / array.length;
     }
 
-    ageCentury[belongsToCentury(person)] = ageCentury[belongsToCentury(person)].concat(getAge(person));
-  });
+    var avgAgeCentury = {};
 
-  return calcAvgAgeByCentury(ageCentury);
+    for(var century in ageCentury){
+      avgAgeCentury[century] = average(ageCentury[century]);
+    }
+
+    return avgAgeCentury;
+  }
+
+  return averageAgeEachCentury(createArrayOfAgesEachCentury());
 }
 
 var DATA = JSON.parse(createData());
-console.log(findAverageAgeByCentry(DATA));
+console.log(findAverageAgeEachCentury(DATA));
 
 // → 16: 43.5
 //   17: 51.2
