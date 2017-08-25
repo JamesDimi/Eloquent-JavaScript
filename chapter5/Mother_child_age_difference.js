@@ -3,9 +3,6 @@
 // Note that not all the mothers mentioned in the data are themselves present in the array.
 // The byName object, which makes it easy to find a person’s object from their name, might be useful here.
 
-// Parse the DATA from the JSON file.
-var DATA = JSON.parse(createData());
-
 // Used to calculate the average
 function average(array)
 {
@@ -53,6 +50,7 @@ function calculateTheAgeAverage(array)
   return average(ageTable);
 }
 
+var DATA = JSON.parse(createData());
 console.log(calculateTheAgeAverage(DATA));
 
 // Function that returns the data given in the book in JSON format.
