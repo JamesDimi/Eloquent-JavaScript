@@ -2,7 +2,7 @@
 // A person is assigned to a century by taking their year of death,
 // dividing it by 100, and rounding it up, as in Math.ceil(person.died / 100)
 
-function findAverageAgeEachCentury(array)
+function findAverageAgeEachCentury(data)
 {
   // finds in which century the person belongs
   function belongsToCentury(person)
@@ -21,7 +21,7 @@ function findAverageAgeEachCentury(array)
   {
     var ageCentury = {};
 
-    array.forEach(function(person){
+    data.forEach(function(person){
       if(ageCentury[belongsToCentury(person)] == undefined){
         ageCentury[belongsToCentury(person)] = [];
       }
