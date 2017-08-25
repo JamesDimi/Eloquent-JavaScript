@@ -29,20 +29,34 @@ function createByNameObj()
   return byName;
 }
 
-function recursiveCalculation(child, mother)
+// calculate the average age between children and mothers
+function calculateTheAgeAverage(array)
 {
-  
+  function ageDiff(child, mother){
+    return child.born - mother.born;
+  }
+
+  var ageTable = [];
+  var byName = createByNameObj();
+
+  array.forEach(function(person){
+    var child = person;
+    var mother = person.mother;
+
+    // is the mother present in the DATA?
+    if(mother in byName){
+      console.log("child: " + child.name + " -> mother: " + mother);
+      ageTable.push(ageDiff(child, byName[mother]));
+    }
+  });
+
+  return average(ageTable);
 }
 
-var byName = createByNameObj();
-console.log(byName);
-
-
-
-
-// Function that return a file in JSON format.
-// Since i don't know yet how to import external .js files
-// i'll do it this way for the time being.
+console.log(calculateTheAgeAverage(DATA));
+// Function that returns the data given in the book in JSON format.
+// I don't know yet how to import external .js that contain the data files
+// so i'll do it this way for the time being.
 function createData(){
   return JSON.stringify([
     {"name": "Carolus Haverbeke", "sex": "m", "born": 1832, "died": 1905, "father": "Carel Haverbeke", "mother": "Maria van Brussel"},
