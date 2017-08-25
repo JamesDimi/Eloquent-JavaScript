@@ -54,6 +54,7 @@ function calculateTheAgeAverage(array)
 }
 
 console.log(calculateTheAgeAverage(DATA));
+
 // Function that returns the data given in the book in JSON format.
 // I don't know yet how to import external .js that contain the data files
 // so i'll do it this way for the time being.
