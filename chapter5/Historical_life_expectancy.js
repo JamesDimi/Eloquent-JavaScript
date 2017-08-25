@@ -19,21 +19,21 @@ function findAverageAgeEachCentury(data)
   // creates the object that contains all the ages for each century
   function createArrayOfAgesEachCentury()
   {
-    var ageCentury = {};
+    var agesEachCentury = {};
 
     data.forEach(function(person){
-      if(ageCentury[belongsToCentury(person)] == undefined){
-        ageCentury[belongsToCentury(person)] = [];
+      if(agesEachCentury[belongsToCentury(person)] == undefined){
+        agesEachCentury[belongsToCentury(person)] = [];
       }
 
-      ageCentury[belongsToCentury(person)] = ageCentury[belongsToCentury(person)].concat(getAge(person));
+      agesEachCentury[belongsToCentury(person)] = agesEachCentury[belongsToCentury(person)].concat(getAge(person));
     });
 
-    return ageCentury;
+    return agesEachCentury;
   }
 
   // calculates the average age for each century
-  function averageAgeEachCentury(ageCentury)
+  function averageAgeEachCentury(agesEachCentury)
   {
     function average(array)
     {
@@ -44,13 +44,13 @@ function findAverageAgeEachCentury(data)
       return array.reduce(plus) / array.length;
     }
 
-    var avgAgeCentury = {};
+    var avgAgeEachCentury = {};
 
-    for(var century in ageCentury){
-      avgAgeCentury[century] = average(ageCentury[century]);
+    for(var century in agesEachCentury){
+      avgAgeEachCentury[century] = average(agesEachCentury[century]);
     }
 
-    return avgAgeCentury;
+    return avgAgeEachCentury;
   }
 
   return averageAgeEachCentury(createArrayOfAgesEachCentury());
