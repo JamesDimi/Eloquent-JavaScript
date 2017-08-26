@@ -8,7 +8,7 @@ function every(array, action)
       decision = false;
     }
   });
-
+  
   return decision;
 }
 
